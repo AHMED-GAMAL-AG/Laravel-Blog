@@ -17,17 +17,19 @@ Route::get('/', function () {
     return view('posts');
 });
 
-Route::get("/posts/{slug_name}", function ($slug) {
+Route::get(
+    "/posts/{slug_name}",
+    function ($slug) {
 
-    $path = __DIR__ . "/../resources/posts/{$slug}.html";
+        $path = __DIR__ . "/../resources/posts/{$slug}.html";
 
-    if(!file_exists($path)) {
-        return redirect("/");
-        // abort(404);
-    }
+        if (!file_exists($path)) {
+            return redirect("/"); //return home page
+            // abort(404);
+        }
 
-    $post =  file_get_contents(__DIR__ . "/../resources/posts/{$slug}.html");
-    return view("post", [
-        "post" => $post
-    ]);
-});
+        $post =  file_get_contents(__DIR__ . "/../resources/posts/{$slug}.html");
+        return view("post", [
+            "post" => $post
+        ]);
+    })->where("slug_name", "[A-z_\-]+"); // regex for slug name capital and small letters, underscore and dash + is for one or more characters
