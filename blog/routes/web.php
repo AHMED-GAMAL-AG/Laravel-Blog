@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,24 +15,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('posts');
+
+
+    return view('posts', [
+        "posts" => Post::all()
+    ]); // posts.blade.php is the view just write posts
 });
 
 Route::get(
     "/posts/{slug_name}",
     function ($slug) {
 
-        if (!file_exists($path = __DIR__ . "/../resources/posts/{$slug}.html")) {
-            return redirect("/"); //return home page
-            // abort(404);
-        }
-
-        $post = cache()->remember("post.{slug_name}", 1200, fn () => file_get_contents($path)); // cache for 20 minutes 1200 sec
-
-        //$post =  file_get_contents(__DIR__ . "/../resources/posts/{$slug}.html");
-
-        return view("post", [
-            "post" => $post
-        ]);
+        // find a post by its slug and pass it to view called "post"
+        return view(
+            "post",
+            [
+                "post" => Post::find($slug)
+            ]
+        );
     }
 )->where("slug_name", "[A-z_\-]+"); // regex for slug name capital and small letters, underscore and dash + is for one or more characters
