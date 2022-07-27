@@ -5,9 +5,17 @@
 <body>
     <?php foreach ($posts as $post) : ?>
 
-        <article>
-            <?= $post ?>
-        </article>
+    <article>
+        <h1>
+            <a href="posts/<?= $post->slug ?>">
+                <?php echo $post->title; ?>
+            </a>
+        </h1>
+
+        <div>
+            <?php echo $post->body; ?>
+        </div>
+    </article>
 
     <?php endforeach ?>
 </body>

@@ -4,22 +4,61 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 class Post
 {
+    public $title;
+    public $date;
+    public $excerpt;
+    public $body;
+    public $slug;
+
+    public function __construct($title, $date, $excerpt, $body, $slug)
+    {
+        $this->title = $title;
+        $this->date = $date;
+        $this->excerpt = $excerpt;
+        $this->body = $body;
+        $this->slug = $slug;
+    }
+
     public static function find($slug)
     {
-
-        if (!file_exists($path = resource_path("posts/{$slug}.html"))) {
-            throw new ModelNotFoundException();
-        }
-        return cache()->remember("posts.{slug}", 1200, fn () => file_get_contents($path)); // cache for 20 minutes 1200 sec
+        // for all the blog posts , find the one with the slug name that was requested
+        return self::all()->firstWhere("slug", $slug);
     }
 
     public static function all()
     {
-        $files = File::files(resource_path("posts/")); //read a diractory of files
+        return collect(File::files(resource_path("posts"))) // get all files in the posts folder and put them in a collection
+        ->map(
+            fn ($file) => YamlFrontMatter::parse(File::get($file)) // parse each file and put the result in a document
+        ) //for each file in the loop push the file into the document variable
 
-        return array_map(fn ($file) =>$file->getContents(),  $files); //loop over $files and path to fn
+        ->map(
+            fn ($document) => new Post( // create a new post object from the document
+                $document->title,
+                $document->date,
+                $document->excerpt,
+                $document->body(),
+                $document->slug
+            )
+        );
+
+
+        //same approach as above
+        //         $files = File::files(resource_path("posts")); // get all files in the posts folder and put them in an array
+        //         return array_map(function ($file) {
+        //     $document = YamlFrontMatter::parseFile($file); //for each file in the loop push the file into the document variable
+
+        //     return new Post( //create a new post object and pass the document data into the constructor
+        //         $document->title,
+        //         $document->date,
+        //         $document->excerpt,
+        //         $document->body(),
+        //         $document->slug
+        //     );
+        // }, $files); //loop over $files and path to fn
     }
 }
