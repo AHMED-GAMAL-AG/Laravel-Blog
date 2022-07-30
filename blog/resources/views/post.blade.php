@@ -4,10 +4,12 @@
 
 <body>
     <article>
-        <h1> <?php echo $post->title; ?> </h1>
-
+        {{-- <h1> <?php echo $post->title; ?> </h1> --}}
+        <h1>
+            {{ $post->title }}
+        </h1>
         <div>
-            <?php echo $post->body; ?>
+            {!! $post->body !!} {{-- eqavilant to <?php echo $post->body; ?> --}}
         </div>
     </article>
 
