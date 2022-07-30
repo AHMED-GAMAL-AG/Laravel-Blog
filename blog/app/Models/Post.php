@@ -26,26 +26,38 @@ class Post
     public static function find($slug)
     {
         // for all the blog posts , find the one with the slug name that was requested
-        return self::all()->firstWhere("slug", $slug);
+        return static::all()->firstWhere("slug", $slug);
+    }
+
+    public static function find_or_fail($slug)
+    {
+        // for all the blog posts , find the one with the slug name that was requested
+        $post =  static::find($slug);
+
+        if (!$post) {
+            throw new ModelNotFoundException();
+        }
+
+        return $post;
     }
 
     public static function all()
     {
-        return cache()->rememberForever("posts.all" ,function() {
+        return cache()->rememberForever("posts.all", function () {
             return collect(File::files(resource_path("posts"))) // get all files in the posts folder and put them in a collection
-            ->map(
-                fn ($file) => YamlFrontMatter::parse(File::get($file)) // parse each file and put the result in a document
-            ) //for each file in the loop push the file into the document variable
+                ->map(
+                    fn ($file) => YamlFrontMatter::parse(File::get($file)) // parse each file and put the result in a document
+                ) //for each file in the loop push the file into the document variable
 
-            ->map(
-                fn ($document) => new Post( // create a new post object from the document
-                    $document->title,
-                    $document->date,
-                    $document->excerpt,
-                    $document->body(),
-                    $document->slug
-                )
-            )->sortByDesc("date"); // sort the posts by date
+                ->map(
+                    fn ($document) => new Post( // create a new post object from the document
+                        $document->title,
+                        $document->date,
+                        $document->excerpt,
+                        $document->body(),
+                        $document->slug
+                    )
+                )->sortByDesc("date"); // sort the posts by date
         });
 
 

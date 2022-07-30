@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Post;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,15 +22,15 @@ Route::get('/', function () {
 });
 
 Route::get(
-    "/posts/{slug_name}",
+    "/posts/{slug}",
     function ($slug) {
 
         // find a post by its slug and pass it to view called "post"
         return view(
             "post",
             [
-                "post" => Post::find($slug)
+                "post" => Post::find_or_fail($slug)
             ]
         );
     }
-)->where("slug_name", "[A-z_\-]+"); // regex for slug name capital and small letters, underscore and dash + is for one or more characters
+);
