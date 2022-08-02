@@ -2,7 +2,8 @@
     <article>
         {{-- <h1> <?php echo $post->title; ?> </h1> --}}
         <h1>
-            {{ $post->title }}
+            {{-- {{ $post->title }} --}} {{-- use if you dont want to send html to browser for security--}}
+            {!! $post->title  !!} {{-- use if you want to send html to browser only use if you have control on it  --}}
         </h1>
         <div>
             {!! $post->body !!} {{-- eqavilant to <?php echo $post->body; ?> --}}

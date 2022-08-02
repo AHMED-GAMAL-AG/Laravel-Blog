@@ -22,14 +22,14 @@ Route::get('/', function () {
 });
 
 Route::get(
-    "/posts/{slug}",
-    function ($slug) {
+    "/posts/{post}",
+    function ($id) {
 
-        // find a post by its slug and pass it to view called "post"
+
         return view(
             "post",
             [
-                "post" => Post::find_or_fail($slug)
+                "post" => Post::findOrFail($id)
             ]
         );
     }
