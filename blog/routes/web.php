@@ -22,14 +22,12 @@ Route::get('/', function () {
 });
 
 Route::get(
-    "/posts/{post}",
-    function ($id) {
-
-
+    "/posts/{post:slug}", // hase to match the wildcard name in the route
+    function (Post $post) {  //Post::where('slug', $post)->findOrFail();
         return view(
             "post",
             [
-                "post" => Post::findOrFail($id)
+                "post" => $post
             ]
         );
     }

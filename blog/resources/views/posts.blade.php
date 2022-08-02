@@ -2,7 +2,7 @@
     @foreach ($posts as $post)
         <article>
             <h1>
-                <a href="posts/{{ $post->id }}">
+                <a href="posts/{{ $post->slug }}">
 
                     {{-- equavilant to <?php echo $post->title; ?> --}}
                     {{-- {{ $post->title }} --}} {{-- use if you dont want to send html to browser for security --}}
