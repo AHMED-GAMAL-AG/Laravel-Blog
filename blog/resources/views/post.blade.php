@@ -4,7 +4,14 @@
         <h1>
             {{-- {{ $post->title }} --}} {{-- use if you dont want to send html to browser for security--}}
             {!! $post->title  !!} {{-- use if you want to send html to browser only use if you have control on it  --}}
+
         </h1>
+
+        <p>
+            <a href="#" >
+                {{ $post->category->name }}
+            </a>
+        </p>
         <div>
             {!! $post->body !!} {{-- eqavilant to <?php echo $post->body; ?> --}}
         </div>
