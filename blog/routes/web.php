@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
     return view('posts', [
-        "posts" => Post::with('category')->get()
+        "posts" => Post::latest()->with(['category' , 'author'])->get() // write with('category' , 'author') to solve n+1 problem
     ]); // posts.blade.php is the view just write posts
 });
 
@@ -39,6 +40,16 @@ Route::get('categories/{category:slug}', function (Category $category) {
         "posts",
         [
             'posts' => $category->posts
+        ]
+    );
+});
+
+Route::get('authors/{author:username}', function (User $author) {
+
+    return view(
+        "posts",
+        [
+            'posts' => $author->posts
         ]
     );
 });
