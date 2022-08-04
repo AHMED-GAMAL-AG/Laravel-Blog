@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
     return view('posts', [
-        "posts" => Post::latest()->with(['category' , 'author'])->get() // write with('category' , 'author') to solve n+1 problem
+        "posts" => Post::get() // write with('category' , 'author') to solve n+1 problem
     ]); // posts.blade.php is the view just write posts
 });
 
