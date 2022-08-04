@@ -20,44 +20,55 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate(); // delete all users
-        Post::truncate(); // delete all posts
-        Category::truncate(); // delete all categories
+        //User::truncate(); // delete all users
+        //Post::truncate(); // delete all posts
+        //Category::truncate(); // delete all categories
         // to prevent duplication and errors in the database, we need to truncate the tables first
 
-        $user = User::factory()->create();
-
-        $personal = Category::create([
-            'name' => 'personal',
-            'slug' => 'personal',
+        $user = User::factory()->create([
+            'name' => 'ahmed gamal',
         ]);
 
-        $family = Category::create([
-            'name' => 'family',
-            'slug' => 'family',
-        ]);
 
-        $work = Category::create([
-            'name' => 'work',
-            'slug' => 'work',
-        ]);
+        Post::factory(3)->create(
+            [
+                'user_id' => $user->id,
+            ]
+        ); // create 10 posts
 
-        Post::create([
-            'user_id' => $user->id,
-            'category_id' => $personal->id,
-            'title' => 'my personal post',
-            'slug' => 'my-personal-post',
-            'body' => '<p>This is the body of the personal post </p>',
-            'excerpt' => '<p> This is the excerpt of the personal post </p>',
-        ]);
+        //     $user = User::factory()->create();
 
-        Post::create([
-            'user_id' => $user->id,
-            'category_id' => $work->id,
-            'title' => 'my work post',
-            'slug' => 'my-work-post',
-            'body' => '<p>This is the body of the work post </p>',
-            'excerpt' => '<p> This is the excerpt of the work post </p>',
-        ]);
+        //     $personal = Category::create([
+        //         'name' => 'personal',
+        //         'slug' => 'personal',
+        //     ]);
+
+        //     $family = Category::create([
+        //         'name' => 'family',
+        //         'slug' => 'family',
+        //     ]);
+
+        //     $work = Category::create([
+        //         'name' => 'work',
+        //         'slug' => 'work',
+        //     ]);
+
+        //     Post::create([
+        //         'user_id' => $user->id,
+        //         'category_id' => $personal->id,
+        //         'title' => 'my personal post',
+        //         'slug' => 'my-personal-post',
+        //         'body' => '<p>This is the body of the personal post </p>',
+        //         'excerpt' => '<p> This is the excerpt of the personal post </p>',
+        //     ]);
+
+        //     Post::create([
+        //         'user_id' => $user->id,
+        //         'category_id' => $work->id,
+        //         'title' => 'my work post',
+        //         'slug' => 'my-work-post',
+        //         'body' => '<p>This is the body of the work post </p>',
+        //         'excerpt' => '<p> This is the excerpt of the work post </p>',
+        //     ]);
     }
 }
