@@ -11,7 +11,7 @@ class Post extends Model
     //protected $fillable = ['title', 'body' , 'excerpt' ,'slug' , 'published_at' , 'category_id'];
     protected $guarded = [];
 
-    protected $with = ['category' , 'author' ]; // eager loading each post with its category and author
+    protected $with = ['category' , 'author']; // eager loading each post with its category and author
 
     public function category()
     {

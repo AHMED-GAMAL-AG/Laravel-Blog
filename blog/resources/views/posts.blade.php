@@ -1,22 +1,22 @@
 <x-layout>
-    @foreach ($posts as $post)
-        <article>
-            <h1>
-                <a href="posts/{{ $post->slug }}">
 
-                    {{-- equavilant to <?php echo $post->title; ?> --}}
-                    {{-- {{ $post->title }} --}} {{-- use if you dont want to send html to browser for security --}}
-                    {!! $post->title !!} {{-- use if you want to send html to browser only use if you have control on it --}}
-                </a>
-            </h1>
+    @include ('post-header')
 
-            <p>
-                <a href="authors/{{ $post->author->username  }}">{{ $post->author->name }}</a> in <a href="categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
-            </p>
+    <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
 
-            <div>
-                {!! $post->excerpt !!} {{-- <?php echo $post->body; ?> --}}
-            </div>
-        </article>
-    @endforeach
+        <x-post-featured-card />
+
+        <div class="lg:grid lg:grid-cols-2">
+            <x-post-card />
+            <x-post-card />
+        </div>
+
+        <div class="lg:grid lg:grid-cols-3">
+
+            <x-post-card />
+            <x-post-card />
+            <x-post-card />
+
+        </div>
+    </main>
 </x-layout>
