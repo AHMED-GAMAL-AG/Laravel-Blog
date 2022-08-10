@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
     return view('posts', [
-        "posts" => Post::get() // write with('category' , 'author') to solve n+1 problem
+        "posts" => Post::get(), // write with('category' , 'author') to solve n+1 problem
+        "categories" => Category::all(),
     ]); // posts.blade.php is the view just write posts
 });
 
@@ -39,7 +40,9 @@ Route::get('categories/{category:slug}', function (Category $category) {
     return view(
         "posts",
         [
-            'posts' => $category->posts
+            'posts' => $category->posts, // show all posts associated with the category
+            'currentCategory' => $category,
+            "categories" => Category::all(),
         ]
     );
 });
@@ -49,7 +52,8 @@ Route::get('authors/{author:username}', function (User $author) {
     return view(
         "posts",
         [
-            'posts' => $author->posts
+            'posts' => $author->posts, // view all posts by the author
+            "categories" => Category::all(),
         ]
     );
 });
