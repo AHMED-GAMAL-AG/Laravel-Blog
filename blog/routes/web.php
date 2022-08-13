@@ -22,7 +22,7 @@ Route::get('/', function () {
         "posts" => Post::get(), // write with('category' , 'author') to solve n+1 problem
         "categories" => Category::all(),
     ]); // posts.blade.php is the view just write posts
-});
+})->name('home');
 
 Route::get(
     "/posts/{post:slug}", // hase to match the wildcard name in the route
@@ -45,7 +45,7 @@ Route::get('categories/{category:slug}', function (Category $category) {
             "categories" => Category::all(),
         ]
     );
-});
+})->name('category');
 
 Route::get('authors/{author:username}', function (User $author) {
 
