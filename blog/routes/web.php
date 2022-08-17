@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -16,33 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [PostController::class , 'index'])->name('home');
 
-    $posts = Post::latest();
-
-    if (request('search')) //search is name in the dearch form
-    {
-        $posts->where('title', 'like', '%' . request('search') . '%') // sql syntax
-            ->orwhere('body', 'like', '%' . request('search') . '%');
-    }
-
-    return view('posts', [
-        "posts" => $posts->get(), // write with('category' , 'author') to solve n+1 problem
-        "categories" => Category::all(),
-    ]); // posts.blade.php is the view just write posts
-})->name('home');
-
-Route::get(
-    "/posts/{post:slug}", // hase to match the wildcard name in the route
-    function (Post $post) {  //Post::where('slug', $post)->findOrFail();
-        return view(
-            "post",
-            [
-                "post" => $post
-            ]
-        );
-    }
-);
+Route::get("/posts/{post:slug}", [PostController::class , 'show']); // hase to match the wildcard name in the route //Post::where('slug', $post)->findOrFail()
 
 Route::get('categories/{category:slug}', function (Category $category) {
     return view(
