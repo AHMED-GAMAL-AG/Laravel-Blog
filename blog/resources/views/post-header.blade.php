@@ -30,7 +30,7 @@
                     All
                 </x-dropdown-item>
                 @foreach ($categories as $category)
-                    <x-dropdown-item href="/categories/{{ $category->slug }}" :active="request()->is('categories/' . $category->slug)"> {{-- to make the category is blue when selected in drop down menu --}}
+                    <x-dropdown-item href="/?category={{ $category->slug }}" :active="request()->is('categories/' . $category->slug)"> {{-- to make the category is blue when selected in drop down menu --}}
                         {{-- same as isset($currentCategory) && $currentCategory->id == $category->id ? --}}
                         {{ ucwords($category->name) }}
                     </x-dropdown-item>

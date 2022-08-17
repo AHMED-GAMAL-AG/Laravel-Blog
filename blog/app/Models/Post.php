@@ -17,10 +17,25 @@ class Post extends Model
     {
         //search is name in the search form //by default it is false ?? safe is null operator to hande if their is nothing to search for
 
-        $query->when($filters['search'] ?? false, function ($query, $search) {
+        $query->when($filters['search'] ?? false, function ($query, $search) {  // search is what user requested in browser
             $query
                 ->where('title', 'like', '%' . $search . '%') // sql syntax
                 ->orwhere('body', 'like', '%' . $search . '%');
+        });
+
+        $query->when($filters['category'] ?? false, function ($query, $category) { //category is what user requested in browser
+
+            $query->whereHas('category' , fn($query) =>
+                $query->where('slug', $category)
+        );
+
+            // $query
+            //     ->whereExists(
+            //         fn ($query) =>
+            //         $query->from('categories')
+            //             ->whereColumn('categories.id', 'posts.category_id') // where they match each other
+            //             ->where('categories.slug', $category)
+            //     );
         });
 
         // if ($filters['search'] ?? false ) //search is name in the search form //by default it is false ?? safe is null operator to hande if their is nothing to search for
