@@ -18,8 +18,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
+    $posts = Post::latest();
+
+    if (request('search')) //search is name in the dearch form
+    {
+        $posts->where('title', 'like', '%' . request('search') . '%') // sql syntax
+            ->orwhere('body', 'like', '%' . request('search') . '%');
+    }
+
     return view('posts', [
-        "posts" => Post::get(), // write with('category' , 'author') to solve n+1 problem
+        "posts" => $posts->get(), // write with('category' , 'author') to solve n+1 problem
         "categories" => Category::all(),
     ]); // posts.blade.php is the view just write posts
 })->name('home');

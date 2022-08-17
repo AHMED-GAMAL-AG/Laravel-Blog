@@ -30,9 +30,8 @@
                     All
                 </x-dropdown-item>
                 @foreach ($categories as $category)
-                    <x-dropdown-item href="/categories/{{ $category->slug }}"
-                        :active="request()->is('categories/' . $category->slug)"> {{-- to make the category is blue when selected in drop down menu --}}
-                        {{-- same as isset($currentCategory) && $currentCategory->id == $category->id ?  --}}
+                    <x-dropdown-item href="/categories/{{ $category->slug }}" :active="request()->is('categories/' . $category->slug)"> {{-- to make the category is blue when selected in drop down menu --}}
+                        {{-- same as isset($currentCategory) && $currentCategory->id == $category->id ? --}}
                         {{ ucwords($category->name) }}
                     </x-dropdown-item>
                 @endforeach
@@ -65,7 +64,7 @@
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
             <form method="GET" action="#">
                 <input type="text" name="search" placeholder="Find something"
-                    class="bg-transparent placeholder-black font-semibold text-sm">
+                    class="bg-transparent placeholder-black font-semibold text-sm" value="{{ request('search') }}"> <!--  request('search') to display what i searched for-->
             </form>
         </div>
     </div>
