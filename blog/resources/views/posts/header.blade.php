@@ -9,33 +9,8 @@
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-4">
         <!--  Category -->
         <div class="relative lg:inline-flex bg-gray-100 rounded-xl">
-
-
-
-            <x-dropdown> {{-- dosent have to be named bec i used  default $slot variable --}}
-
-                <x-slot name="trigger"> {{-- has to be nammed bec triger is not the defualt variable what ever is inserted here will go to $tigger variable in dropdwon.blade component --}}
-                    <button class="py-2 pl-3 pr-9 text-sm font-semibold w-full lg:w-32 text-left flex lg:inline-flex">
-
-                        {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Category' }}
-
-                        <x-down-arrow class="absolute pointer-events-none" style="right: 12px;">
-
-                        </x-down-arrow>
-                    </button> <!-- toggle the boutton to show / hide -->
-                </x-slot>
-
-
-                <x-dropdown-item href="/" :active="request()->routeis('home')"> {{-- to make all is blue when selected in drop down menu --}}
-                    All
-                </x-dropdown-item>
-                @foreach ($categories as $category)
-                    <x-dropdown-item href="/?category={{ $category->slug }}" :active="request()->is('categories/' . $category->slug)"> {{-- to make the category is blue when selected in drop down menu --}}
-                        {{-- same as isset($currentCategory) && $currentCategory->id == $category->id ? --}}
-                        {{ ucwords($category->name) }}
-                    </x-dropdown-item>
-                @endforeach
-            </x-dropdown>
+            <x-category-dropdown>
+            </x-category-dropdown>
         </div>
 
         <!-- Other Filters -->
@@ -64,7 +39,8 @@
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
             <form method="GET" action="#">
                 <input type="text" name="search" placeholder="Find something"
-                    class="bg-transparent placeholder-black font-semibold text-sm" value="{{ request('search') }}"> <!--  request('search') to display what i searched for-->
+                    class="bg-transparent placeholder-black font-semibold text-sm" value="{{ request('search') }}">
+                <!--  request('search') to display what i searched for-->
             </form>
         </div>
     </div>

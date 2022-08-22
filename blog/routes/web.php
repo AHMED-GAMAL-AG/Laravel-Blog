@@ -38,7 +38,6 @@ Route::get('authors/{author:username}', function (User $author) {
         "posts",
         [
             'posts' => $author->posts, // view all posts by the author
-            "categories" => Category::all(),
         ]
     );
 });

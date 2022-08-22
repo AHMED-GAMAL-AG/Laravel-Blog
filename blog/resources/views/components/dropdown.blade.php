@@ -4,13 +4,13 @@
 <div x-data="{ show: false }" @click.away="show = false"> {{-- x-data is from js alpine library  --}}
 
     <div @click="show = ! show ">
-        {{ $trigger }} {{-- comes from post-header.blade.php --}}
+        {{ $trigger }} {{-- comes from header.blade.php --}}
     </div>
 
 
     {{-- Links --}}
     <div x-show="show" class="py-2 absolute bg-gray-100 mt-2 rounded-xl w-full z-50 overflow-auto max-h-52" style="display: none">
-        {{ $slot }} {{-- comes from post-header.blade.php --}}
+        {{ $slot }} {{-- comes from header.blade.php --}}
     </div>
 </div>
 
