@@ -25,9 +25,11 @@ class Post extends Model
 
         $query->when($filters['category'] ?? false, function ($query, $category) { //category is what user requested in browser
 
-            $query->whereHas('category' , fn($query) =>
+            $query->whereHas(
+                'category',
+                fn ($query) =>
                 $query->where('slug', $category)
-        );
+            );
 
             // $query
             //     ->whereExists(
@@ -37,6 +39,15 @@ class Post extends Model
             //             ->where('categories.slug', $category)
             //     );
         });
+
+        $query->when($filters['author'] ?? false, function ($query, $author) { //category is what user requested in browser
+            $query->whereHas(
+                'author',
+                fn ($query) =>
+                $query->where('username', $author)
+            );
+        });
+
 
         // if ($filters['search'] ?? false ) //search is name in the search form //by default it is false ?? safe is null operator to hande if their is nothing to search for
         // {
