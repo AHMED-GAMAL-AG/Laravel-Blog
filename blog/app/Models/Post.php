@@ -18,9 +18,10 @@ class Post extends Model
         //search is name in the search form //by default it is false ?? safe is null operator to hande if their is nothing to search for
 
         $query->when($filters['search'] ?? false, function ($query, $search) {  // search is what user requested in browser
-            $query
-                ->where('title', 'like', '%' . $search . '%') // sql syntax
-                ->orwhere('body', 'like', '%' . $search . '%');
+            $query->where(fn($query) =>
+                $query->where('title', 'like', '%' . $search . '%') // sql syntax
+                ->orwhere('body', 'like', '%' . $search . '%')
+        );
         });
 
         $query->when($filters['category'] ?? false, function ($query, $category) { //category is what user requested in browser
