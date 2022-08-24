@@ -12,8 +12,8 @@
     </x-slot>
 
 
-    <x-dropdown-item href="/" :active="request()->routeis('home')"> {{-- to make all is blue when selected in drop down menu --}}
-        All
+    <x-dropdown-item href="/? {{ http_build_query(request()->except('category' , 'page')) }}" :active="request()->routeis('home')"> All
+        {{-- to make all is blue when selected in drop down menu --}}
     </x-dropdown-item>
 
     {{-- @php
@@ -21,9 +21,11 @@
         request()->except('category') //retuns an array
     @endphp --}}
 
-    @foreach ($categories as $category) {{-- to search and select item from drop down menue together --}}
-        <x-dropdown-item href="/?category={{ $category->slug }} & {{ http_build_query(request()->except('category')) }} " {{-- ->except('category')) bec it is duplicated one from the query and one from the current item in the drop down  --}}
-            :active="request()->is('categories/' . $category->slug)"> {{-- to make the category is blue when selected in drop down menu --}}
+    @foreach ($categories as $category)
+        {{-- to search and select item from drop down menue together --}}
+        <x-dropdown-item
+            href="/?category={{ $category->slug }} & {{ http_build_query(request()->except('category' , 'page')) }} "
+            {{-- ->except('category')) bec it is duplicated one from the query and one from the current item in the drop down and 'page' bec if i choose a category while using pagination it will show nothing ex.page 4 and a category is in page 1 --}} :active="request()->is('categories/' . $category->slug)"> {{-- to make the category is blue when selected in drop down menu --}}
             {{-- same as isset($currentCategory) && $currentCategory->id == $category->id ? --}}
             {{ ucwords($category->name) }}
         </x-dropdown-item>
