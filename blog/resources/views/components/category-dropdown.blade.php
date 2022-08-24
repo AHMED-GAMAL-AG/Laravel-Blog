@@ -15,8 +15,15 @@
     <x-dropdown-item href="/" :active="request()->routeis('home')"> {{-- to make all is blue when selected in drop down menu --}}
         All
     </x-dropdown-item>
-    @foreach ($categories as $category)
-        <x-dropdown-item href="/?category={{ $category->slug }}" :active="request()->is('categories/' . $category->slug)"> {{-- to make the category is blue when selected in drop down menu --}}
+
+    {{-- @php
+        [ 'name' => 'jone'] //name = jone that what the http_build_query function will return
+        request()->except('category') //retuns an array
+    @endphp --}}
+
+    @foreach ($categories as $category) {{-- to search and select item from drop down menue together --}}
+        <x-dropdown-item href="/?category={{ $category->slug }} & {{ http_build_query(request()->except('category')) }} " {{-- ->except('category')) bec it is duplicated one from the query and one from the current item in the drop down  --}}
+            :active="request()->is('categories/' . $category->slug)"> {{-- to make the category is blue when selected in drop down menu --}}
             {{-- same as isset($currentCategory) && $currentCategory->id == $category->id ? --}}
             {{ ucwords($category->name) }}
         </x-dropdown-item>
