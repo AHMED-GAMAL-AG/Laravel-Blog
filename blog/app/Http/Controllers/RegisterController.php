@@ -24,6 +24,9 @@ class RegisterController extends Controller
         // if validation fails laravel will redirect back to the form with the errors
         User::create($attributes);
 
-        return redirect('/');
+        // session()->flash('success', 'Your account has been created.' ); // 'success' is the session key
+
+        return redirect('/')->with('success', 'Your account has been created.' ); //  equivlant to session()->flash('success', 'Your account has been created.' ); // 'success' is the session key
+
     }
 }
