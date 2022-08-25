@@ -45,6 +45,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+
+    public function setpasswordAttribute($password)  // you must write set_what you want_Attribute like this to work
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
     public function posts() //$user->posts
     {
         return $this->hasMany(Post::class); //category has many posts
