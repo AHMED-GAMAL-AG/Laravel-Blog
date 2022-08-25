@@ -10,7 +10,12 @@
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="name"> name </label>
 
                     <input class="border border-gray-400  p-2 w-full" type="text" name="name" id="name"
-                        required>
+                        value="{{ old('name') }}" required> {{-- value="{{ old('name') }} bec when i show an error message all the data is cleared --}}
+
+                    @error('name')
+                        {{-- crosponds to this from input name="name"  $message is the default error --}}
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div class="mb-6">
@@ -18,7 +23,13 @@
                     </label>
 
                     <input class="border border-gray-400  p-2 w-full" type="text" name="username" id="username"
-                        required>
+                        value="{{ old('username') }}" required>
+
+                    @error('username')
+                        {{-- crosponds to this from input name="username"  $message is the default error --}}
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+
                 </div>
 
                 <div class="mb-6">
@@ -26,7 +37,13 @@
                     </label>
 
                     <input class="border border-gray-400  p-2 w-full" type="email" name="email" id="email"
-                        required>
+                        value="{{ old('email') }}" required>
+
+                    @error('email')
+                        {{-- crosponds to this from input name="email"  $message is the default error --}}
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+
                 </div>
 
                 <div class="mb-6">
@@ -35,6 +52,11 @@
 
                     <input class="border border-gray-400  p-2 w-full" type="password" name="password" id="password"
                         required>
+
+                    @error('password')
+                        {{-- crosponds to this from input name="password"  $message is the default error --}}
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
 
@@ -42,6 +64,15 @@
                     <button type="submit"
                         class="bg-blue-400 text-white rounded p-2 px-4 hover:bg-blue-500">submit</button>
                 </div>
+
+
+                @if ($errors->any()) {{-- render the html if their is any error from the error messages above and show all of them in the bottom of the form --}}
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li class="text-red-500 text-xs">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
 
             </form>
         </main>
