@@ -15,8 +15,20 @@
                 </a>
             </div>
 
-            <div class="mt-8 md:mt-0">
-                <a href="/" class="text-xs font-bold uppercase">Home Page</a>
+            <div class="mt-8 md:mt-0 flex items-center">
+
+                @auth {{-- a helper function only if the user is loged in render this <a> --}}
+                    <span class="text-xs font-bold uppercase"> Welcome,{{ auth()->user()->name }}! </span>
+
+                    <form action="/logout" method="post" class="text-xs font-semibold text-blue-500 ml-6">
+                        @csrf {{-- cross site request forgery to prevent 419 PAGE EXPIRED erorr for example it shows if i clicks a button that log me out of pizza.com instead of laracts.com --}}
+
+                        <button type="submit">Log Out</button>
+                    </form>
+                @else
+                    <a href="/register" class="text-xs font-bold uppercase">Register</a>
+                    <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
+                @endauth
 
                 <a href="#"
                     class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
@@ -55,6 +67,6 @@
         </footer>
     </section>
 
-    <x-flash/> {{-- flash success message --}}
+    <x-flash /> {{-- flash success message --}}
 
 </body>

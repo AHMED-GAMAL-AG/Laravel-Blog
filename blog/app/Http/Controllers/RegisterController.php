@@ -22,11 +22,11 @@ class RegisterController extends Controller
             'password' => 'required|min:7|max:255',
         ]);
         // if validation fails laravel will redirect back to the form with the errors
-        User::create($attributes);
+        $user = User::create($attributes);
 
-        // session()->flash('success', 'Your account has been created.' ); // 'success' is the session key
+        auth()->login($user); // helper function to login the user
 
-        return redirect('/')->with('success', 'Your account has been created.' ); //  equivlant to session()->flash('success', 'Your account has been created.' ); // 'success' is the session key
+        return redirect('/')->with('success', 'Your account has been created.'); //  equivlant to session()->flash('success', 'Your account has been created.' ); // 'success' is the session key
 
     }
 }

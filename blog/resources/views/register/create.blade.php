@@ -4,7 +4,7 @@
             <h1 class="text-center font-bold text-xl">Register!</h1>
 
             <form method="POST" action="/register">
-                @csrf {{-- cross site request forgery  to prevent 419 PAGE EXPIRED erorr --}}
+                @csrf {{-- cross site request forgery  to prevent 419 PAGE EXPIRED erorr for example it shows if i clicks a button that log me out of pizza.com instead of laracts.com --}}
 
                 <div class="mb-6">
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="name"> name </label>
