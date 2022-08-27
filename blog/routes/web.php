@@ -41,6 +41,7 @@ use Illuminate\Support\Facades\Route;
 //     );
 // });
 
+//(route name , function name inside the class)
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 
@@ -50,4 +51,10 @@ Route::get('register', [RegisterController::class, 'create'])->middleware('guest
 
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest'); // only a guest that is not loged in can access this route app/http/middleware/kernel.php thier you will find all the function attributes if you tried access the route it will redirect to '/home' but i changed to to '/' in RouteServiceProvider.php
 
-Route::post('logout' , [SessionsController::class, 'destroy']);
+Route::get('login', [SessionsController::class, 'create'])->middleware('guest'); // a user is already loged in he dont neet to access the log in page
+
+Route::post('login', [SessionsController::class, 'store'])->middleware('guest'); // a user is already loged in he dont neet to access the log in page
+
+
+Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth'); // you have to be authenticated to reach this end point
+
