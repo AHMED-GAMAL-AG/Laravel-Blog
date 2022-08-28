@@ -23,17 +23,20 @@ class SessionsController extends Controller
         ]);
 
         //attempt to authenticate and log in the user
-        if (auth()->attempt($attributes)) {
-            session()->regenerate(); // regenerate the session id to prevent session fixation attacks
-            //redirect with a success flash message
-            return redirect('/')->with('success', 'Welcom Back!');
+        if (!auth()->attempt($attributes)) {
+            // auth faild pro way
+            throw ValidationException::withMessages(
+                [
+                    'email' => 'Your Provided credentials could not be verified.'
+                ]
+            );
         }
 
-        // auth faild pro way
-        throw ValidationException::withMessages([
-            'email' => 'Your Provided credentials could not be verified.']
-        );
 
+
+        session()->regenerate(); // regenerate the session id to prevent session fixation attacks
+        //redirect with a success flash message
+        return redirect('/')->with('success', 'Welcom Back!');
 
 
         // auth failed
