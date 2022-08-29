@@ -25,7 +25,9 @@ class DatabaseSeeder extends Seeder
         //Category::truncate(); // delete all categories
         // to prevent duplication and errors in the database, we need to truncate the tables first
 
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'name' => 'Ahmed Gamal',
+        ]);
 
 
         Post::factory(20)->create(
