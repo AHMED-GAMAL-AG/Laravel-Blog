@@ -9,6 +9,9 @@ class Comment extends Model
 {
     use HasFactory;
 
+
+    protected $guarded = [];
+
     public function post() //function name is important laravel will use post() to figure out the culmn name is post_id
     {
         return $this->belongsTo(Post::class); // comment belongs to post
