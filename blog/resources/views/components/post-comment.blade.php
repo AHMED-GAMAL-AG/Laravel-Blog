@@ -3,7 +3,7 @@
     <article class="flex  space-x-4">
 
         <div class="flex-shrink-0">
-            <img src="https://i.pravatar.cc/60?img=67" alt="" width="60" height="60" class="rounded-xl"> {{-- use "https://i.pravatar.cc/60?u={{ $comment->user_id }}" for dynamic images  --}}
+            <img src="https://avatars.dicebear.com/api/adventurer/{{ $comment->user_id}}.svg" alt="" width="60" height="60" class="rounded-xl">
         </div>
 
         <div>
