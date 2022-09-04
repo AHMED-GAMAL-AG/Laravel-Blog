@@ -20,6 +20,7 @@ class RegisterController extends Controller
             'username' => 'required|min:3|max:255|unique:users,username', //unique:table,column' look in the data base in this table and colomn check if it is uniqe exist or not
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|min:7|max:255',
+            'gender' => 'required',
         ]);
         // if validation fails laravel will redirect back to the form with the errors
         $user = User::create($attributes);

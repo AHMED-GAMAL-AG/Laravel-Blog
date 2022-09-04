@@ -60,18 +60,16 @@
                 </div>
 
 
-                <div>
-                    <div class="mb-2">
-                        <label class="block uppercase font-bold text-xs text-gray-700" for="gender">
-                            Select your gender
+                {{-- select gender --}}
+                <div class='mb-6'>
+                    <div class=" relative flex lg:inline-flex items-center bg-gray-100 ">
+                        <label class="block uppercase font-bold text-xs text-gray-700 mr-2" for="gender">
+                            Select your gender :
                         </label>
-                    </div>
-
-                    <div class=" relative flex lg:inline-flex items-center bg-gray-200 rounded-xl mb-6" name="Gender">
-
-
-                        <select class=" flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold">
-                            <option value="category" disabled selected>Gender
+                        <select
+                            class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold bg-gray-200 rounded-xl"
+                            name="gender" required>
+                            <option value="" disabled selected>Gender
                             </option>
                             <option value="male">Male
                             </option>
@@ -89,6 +87,12 @@
                                 </path>
                             </g>
                         </svg>
+                    </div>
+                    <div >
+                        @error('gender')
+                            {{-- crosponds to this from select name="gender"  $message is the default error --}}
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
 
