@@ -17,13 +17,15 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $gender = fake()->randomElement(['male', 'female']); // genarate random user gender
+
         return [
-            'name' => fake()->name(),
+            'name' => fake()->name($gender), // make the name matches the gender
             'username' => fake()->unique()->userName,
             'email' => fake()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'gender'=>'male',
+            'gender'=>$gender,
             'remember_token' => Str::random(10),
         ];
     }

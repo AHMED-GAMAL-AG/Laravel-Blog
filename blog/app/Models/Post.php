@@ -69,7 +69,7 @@ class Post extends Model
         return $this->belongsTo(Category::class); //post belongs to category
     }
 
-    public function author() // the forgien key is author_id so i have to overide ir
+    public function author() // the forgien key is author_id so i have to overide it
     {
         return $this->belongsTo(User::class, 'user_id'); //post belongs to user
     }

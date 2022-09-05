@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -21,7 +22,7 @@ class PostController extends Controller
         return view(
             "posts.show",
             [
-                "post" => $post
+                "post" => $post, //pass the object to the view
             ]
         );
     }

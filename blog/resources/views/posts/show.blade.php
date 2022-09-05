@@ -57,15 +57,15 @@
                     @include('posts.add-comment-form')
 
 
-                        @foreach ($post->comments as $comment)
-                            <x-post-comment :comment="$comment" />
-                        @endforeach
-                    </section>
+                    @foreach ($post->comments as $comment)
+                        <x-post-comment :comment="$comment" />
+                    @endforeach
+                </section>
 
-                </article>
-            </main>
-        </section>
-        </body>
+            </article>
+        </main>
+    </section>
+    </body>
 
 
-    </x-layout>
+</x-layout>

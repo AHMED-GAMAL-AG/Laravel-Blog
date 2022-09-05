@@ -18,7 +18,7 @@
             <div class="mt-8 md:mt-0 flex items-center">
 
                 @auth {{-- a helper function only if the user is loged in render this <a> --}}
-                    <span class="text-xs font-bold uppercase"> Welcome,{{ auth()->user()->name }}! </span>
+                    <span class="text-xs font-bold uppercase"> Welcome,{{ auth()->user()->name }}! </span> {{-- auth()->user()->name only use it when you are shure the user is signed in it makes object of the current user other wise it will return null --}}
 
                     <form action="/logout" method="post" class="text-xs font-semibold text-blue-500 ml-6">
                         @csrf {{-- cross site request forgery to prevent 419 PAGE EXPIRED erorr for example it shows if i clicks a button that log me out of pizza.com instead of laracts.com --}}
