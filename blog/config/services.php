@@ -32,6 +32,10 @@ return [
     ],
 
     'mailchimp' => [
-        'key' => env('MAILCHIMP_KEY')
+        'key' => env('MAILCHIMP_KEY'), // this is the key that i got from mailchimp from a variable in the .env file
+        'lists' => [
+            'subscribers' => env('MAILCHIM_LIST_SUBSCRIBERS'),
+        ]
+
     ]
 ];

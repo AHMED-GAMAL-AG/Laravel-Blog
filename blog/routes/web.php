@@ -1,13 +1,16 @@
 <?php
 
-use App\Http\Controllers\PostCommentsController;
+use App\Http\Controllers\NewsletterController;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
+use App\Services\Newsletter;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
-use App\Models\Category;
-use App\Models\Post;
-use App\Models\User;
-use Illuminate\Support\Facades\Route;
+use Illuminate\validation\ValidationException;
+use App\Http\Controllers\PostCommentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,21 +23,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// index, create, store, show, edit, update, destroy try to stick to the convention of the name of the controller and the name of the function
+
+// "/" , "/posts/{post:slug}" , "/posts/{post:slug}/comments" , "/register" , "/login" , "/logout" are used when you want to access the route from the browser ex. <a href="/login">
 
 
-
-Route::get('ping', function () {
-
-    $mailchimp = new \MailchimpMarketing\ApiClient();
-
-    $mailchimp->setConfig([
-        'apiKey' => config('services.mailchimp.key'),
-        'server' => 'us21'
-    ]);
-
-    $response = $mailchimp->lists->getAllLists();
-    dd($response);
-});
+Route::post('newsletter', NewsletterController::class); // single action controller i dont need ti give it an action
 
 
 Route::get('/', [PostController::class, 'index'])->name('home');
@@ -54,9 +48,7 @@ Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
 
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth'); // you have to be authenticated to reach this end point
 
-// index, create, store, show, edit, update, destroy try to stick to the convention of the name of the controller and the name of the function
 
-// "/" , "/posts/{post:slug}" , "/posts/{post:slug}/comments" , "/register" , "/login" , "/logout" are used when you want to access the route from the browser ex. <a href="/login">
 
 
 
