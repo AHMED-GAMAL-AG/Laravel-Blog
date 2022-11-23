@@ -48,7 +48,7 @@ Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
 
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth'); // you have to be authenticated to reach this end point
 
-
+Route::get('admin/posts/create' , [PostController::class, 'create'])->middleware('admin'); // for the admin to create a post
 
 
 
