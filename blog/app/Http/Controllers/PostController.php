@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule as ValidationRule;
 use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends Controller
@@ -32,5 +33,23 @@ class PostController extends Controller
     {
 
         return view("posts.create");
+    }
+
+
+    public function store()
+    {
+        $attributes = request()->validate([
+            'title' => 'required',
+            'slug' => ['required' , ValidationRule::unique('posts', 'slug')], // this has to be unique in the posts table on the slug column
+            'excerpt' => 'required',
+            'body' => 'required',
+            'category_id' => ['required' , ValidationRule::exists('categories','id')] // make sure that this id exists in the categories table
+        ]);
+
+        $attributes['user_id'] = auth()->id();
+
+        Post::create($attributes);
+
+        return redirect('/');
     }
 }
