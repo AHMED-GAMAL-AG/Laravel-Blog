@@ -5,7 +5,8 @@
 
             <header class="flex items-center">
                 {{-- <img src="https://avatars.dicebear.com/api/adventurer/{{ auth()->id() }}.svg" alt="" width="40" height="40" class="rounded-full"> --}}
-                <img src="https://joeschmoe.io/api/v1/{{ auth()->user()->gender }}/{{ auth()->id() }}" alt="" width="40" height="40" class="rounded-full"> {{-- auth()->user()->name only use it when you are shure the user is signed in it makes object of the current user other wise it will return null --}}
+                <img src="https://joeschmoe.io/api/v1/{{ auth()->user()->gender }}/{{ auth()->id() }}" alt=""
+                    width="40" height="40" class="rounded-full"> {{-- auth()->user()->name only use it when you are shure the user is signed in it makes object of the current user other wise it will return null --}}
 
                 <h2 class="ml-4">Want to participate?</h2>
             </header>
@@ -20,8 +21,8 @@
             </div>
 
             <div class="flex justify-end mt-6 pt-6 border-t border-gray-200">
-                <x-submit-button>POST
-                </x-submit-button>
+                <x-form.button> POST </x-form.button>
+
             </div>
         </form>
     </x-panel>
