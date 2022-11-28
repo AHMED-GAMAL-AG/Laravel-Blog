@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'public'),  // i changed this from local to public and aslo chandged FILESYSTEM_DISK=public in .env file
 
     /*
     |--------------------------------------------------------------------------
@@ -36,6 +36,7 @@ return [
             'throw' => false,
         ],
 
+        // this is the one i want to use
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
