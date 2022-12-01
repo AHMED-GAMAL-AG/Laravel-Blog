@@ -25,14 +25,25 @@
             <div class="mt-8 md:mt-0 flex items-center">
 
                 @auth {{-- a helper function only if the user is loged in render this <a> --}}
-                    <span class="text-xs font-bold uppercase"> Welcome,{{ auth()->user()->name }}! </span>
-                    {{-- auth()->user()->name only use it when you are shure the user is signed in it makes object of the current user other wise it will return null --}}
 
-                    <form action="/logout" method="post" class="text-xs font-semibold text-blue-500 ml-6">
-                        @csrf {{-- cross site request forgery to prevent 419 PAGE EXPIRED erorr for example it shows if i clicks a button that log me out of pizza.com instead of laracts.com --}}
+                    <x-dropdown>
+                        {{-- auth()->user()->name only use it when you are shure the user is signed in it makes object of the current user other wise it will return null --}}
+                        <x-slot name="trigger">
+                            <button class="text-xs font-bold uppercase"> Welcome,{{ auth()->user()->name }}! </button>
+                        </x-slot>
 
-                        <button type="submit">Log Out</button>
-                    </form>
+                        <x-dropdown-item href="/admin/dashboard">Dashboard</x-dropdown-item>
+                        {{-- make active true if that is the page iam currently on to highlit it --}}
+                        <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New Post</x-dropdown-item>
+                        {{-- x-data="{}" is from js alpine library the href dosent go any where instead i will prevent @click.prevent that click action and find the log out form and submit it    --}}
+                        <x-dropdown-item href="#" x-data="{}"
+                            @click.prevent="document.querySelector('#logout-form').submit()">Log Out</x-dropdown-item>
+
+                        <form action="/logout" method="post" class="hiden" id="logout-form"> {{-- hiden form to log out i will log out from the dropdown not the form button --}}
+                            @csrf {{-- cross site request forgery to prevent 419 PAGE EXPIRED erorr for example it shows if i clicks a button that log me out of pizza.com instead of laracts.com --}}
+                        </form>
+
+                    </x-dropdown>
                 @else
                     <a href="/register" class="text-xs font-bold uppercase">Register</a>
                     <a href="/login" class="ml-6 text-xs font-bold uppercase">Log In</a>
@@ -67,11 +78,11 @@
 
                             <div>
                                 <input id="email" name="email" type="text" placeholder="Your email address"
-                                class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none">
+                                    class="lg:bg-transparent py-2 lg:py-0 pl-4 focus-within:outline-none">
 
                                 @error('email')
-                                <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
-                            @enderror
+                                    <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 

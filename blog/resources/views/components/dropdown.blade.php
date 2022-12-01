@@ -1,7 +1,7 @@
 @props(['trigger'])
 
 {{-- Triger --}}
-<div x-data="{ show: false }" @click.away="show = false"> {{-- x-data is from js alpine library  --}}
+<div x-data="{ show: false }" @click.away="show = false" class="relative"> {{-- x-data is from js alpine library  --}}
 
     <div @click="show = ! show ">
         {{ $trigger }} {{-- comes from header.blade.php --}}
