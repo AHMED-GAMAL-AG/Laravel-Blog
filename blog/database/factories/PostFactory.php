@@ -25,6 +25,7 @@ class PostFactory extends Factory
             'slug' => $this->faker->slug,
             'excerpt' => '<p>' . implode('</p><p>', $this->faker->paragraphs(2)) . '</p>',
             'body' => '<p>' . implode('</p><p>', $this->faker->paragraphs(6)) . '</p>',
+            'thumbnail' => 'thumbnails/illustration-' . rand(1,5) . '.png', // to use a random image from the public/storage/thumbnails folder  illustration-1.png, illustration-2.png, illustration-3.png, illustration-4.png, illustration-5.png
         ];
     }
 }
