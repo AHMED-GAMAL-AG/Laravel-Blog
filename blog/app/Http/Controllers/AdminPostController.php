@@ -76,7 +76,6 @@ class AdminPostController extends Controller
             'excerpt' => 'required',
             'body' => 'required',
             'category_id' => ['required', ValidationRule::exists('categories', 'id')], // make sure that this id exists in the categories table
-            'puplished_at' => 'required',
         ]);
     }
 
