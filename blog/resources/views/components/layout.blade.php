@@ -24,18 +24,20 @@
 
             <div class="mt-8 md:mt-0 flex items-center">
 
-                @auth {{-- a helper function only if the user is loged in render this <a> --}}
+                @auth {{-- a helper function only if the user is loged in render this <a> to avoid an exeption if the user is not signed in --}}
 
                     <x-dropdown>
                         {{-- auth()->user()->name only use it when you are shure the user is signed in it makes object of the current user other wise it will return null --}}
                         <x-slot name="trigger">
                             <button class="text-xs font-bold uppercase"> Welcome,{{ auth()->user()->name }}! </button>
                         </x-slot>
+                        @admin {{--a custom blade directive to check if the user is admin or not declared in AppServiceProvider.php --}}
+                            <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')"> Dashboard </x-dropdown-item>
+                            {{-- make active true if that is the page iam currently on to highlit it --}}
+                            <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New Post</x-dropdown-item>
+                            {{-- x-data="{}" is from js alpine library the href dosent go any where instead i will prevent @click.prevent that click action and find the log out form and submit it    --}}
+                        @endadmin {{-- same as @can('admin') @endcan or @if (auth()->user()->can('admin')) @endif these two check if the user is admin using the gate in AppServiceProvider.php --}}
 
-                        <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')"> Dashboard </x-dropdown-item>
-                        {{-- make active true if that is the page iam currently on to highlit it --}}
-                        <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New Post</x-dropdown-item>
-                        {{-- x-data="{}" is from js alpine library the href dosent go any where instead i will prevent @click.prevent that click action and find the log out form and submit it    --}}
                         <x-dropdown-item href="#" x-data="{}"
                             @click.prevent="document.querySelector('#logout-form').submit()">Log Out</x-dropdown-item>
 

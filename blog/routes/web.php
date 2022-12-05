@@ -49,13 +49,18 @@ Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
 
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth'); // you have to be authenticated to reach this end point
 
-// admin routes
-Route::get('admin/posts/create', [AdminPostController::class, 'create'])->middleware('admin'); // for the admin to create a post
-Route::post('admin/posts', [AdminPostController::class, 'store'])->middleware('admin');
-Route::get('admin/posts', [AdminPostController::class, 'index'])->middleware('admin');  // for the admin to see all the posts
-Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit'])->middleware('admin');
-Route::patch('admin/posts/{post}', [AdminPostController::class, 'update'])->middleware('admin');
-Route::delete('admin/posts/{post}', [AdminPostController::class, 'destroy'])->middleware('admin');
+Route::middleware('can:admin')->group(function () { // group the routes with the same middleware instead of writing it for every route
+    // admin routes // i created a custom blade directive to check if the user is admin or not in AppServiceProvider.php 'admin' i can refrece it as a meddleware in the routes as laravel ships with a middleware called 'can' in the kernel.php used for authorization can:then the ability name
+
+    Route::resource('admin/posts', AdminPostController::class)->except('show'); // the show end point is refrerenced ->except('show') i dont need it you will see it if you run php artisan route:list
+    // Route::get('admin/posts/create', [AdminPostController::class, 'create']); // for the admin to create a post
+    // Route::post('admin/posts', [AdminPostController::class, 'store']);
+    // Route::get('admin/posts', [AdminPostController::class, 'index']);  // for the admin to see all the posts
+    // Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit']);
+    // Route::patch('admin/posts/{post}', [AdminPostController::class, 'update']);
+    // Route::delete('admin/posts/{post}', [AdminPostController::class, 'destroy']);
+});
+
 
 
 

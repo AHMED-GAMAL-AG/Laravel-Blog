@@ -55,7 +55,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        'admin' => MustBeAdministrator::class, // i created this middleware to activate the mustbeadministrator middleware
+        // 'admin' => MustBeAdministrator::class, // i created this middleware to activate the mustbeadministrator middleware // i deleted this middleware because i defined a gate ability in the AuthServiceProvider.php
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
