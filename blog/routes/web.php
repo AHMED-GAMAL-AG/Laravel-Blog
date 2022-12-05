@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\NewsletterController;
 use App\Models\Post;
 use App\Models\User;
@@ -48,9 +49,13 @@ Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
 
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth'); // you have to be authenticated to reach this end point
 
-Route::get('admin/posts/create' , [PostController::class, 'create'])->middleware('admin'); // for the admin to create a post
-
-Route::post('admin/posts' , [PostController::class, 'store'])->middleware('admin');
+// admin routes
+Route::get('admin/posts/create', [AdminPostController::class, 'create'])->middleware('admin'); // for the admin to create a post
+Route::post('admin/posts', [AdminPostController::class, 'store'])->middleware('admin');
+Route::get('admin/posts', [AdminPostController::class, 'index'])->middleware('admin');  // for the admin to see all the posts
+Route::get('admin/posts/{post}/edit', [AdminPostController::class, 'edit'])->middleware('admin');
+Route::patch('admin/posts/{post}', [AdminPostController::class, 'update'])->middleware('admin');
+Route::delete('admin/posts/{post}', [AdminPostController::class, 'destroy'])->middleware('admin');
 
 
 
