@@ -30,28 +30,17 @@ use App\Http\Controllers\PostCommentsController;
 
 
 Route::post('newsletter', NewsletterController::class); // single action controller i dont need ti give it an action
-
-
 Route::get('/', [PostController::class, 'index'])->name('home');
-
 Route::get("/posts/{post:slug}", [PostController::class, 'show']); // hase to match the wildcard name in the route //Post::where('slug', $post)->findOrFail()
-
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest'); // only a guest that is not loged in can access this route app/http/middleware/kernel.php thier you will find all the function attributes if you tried access the route it will redirect to '/home' but i changed to to '/' in RouteServiceProvider.php
-
 Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store']);
-
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest'); // only a guest that is not loged in can access this route app/http/middleware/kernel.php thier you will find all the function attributes if you tried access the route it will redirect to '/home' but i changed to to '/' in RouteServiceProvider.php
-
 Route::get('login', [SessionsController::class, 'create'])->middleware('guest'); // a user is already loged in he dont neet to access the log in page
-
 Route::post('login', [SessionsController::class, 'store'])->middleware('guest'); // a user is already loged in he dont neet to access the log in page
-
-
 Route::post('logout', [SessionsController::class, 'destroy'])->middleware('auth'); // you have to be authenticated to reach this end point
 
 Route::middleware('can:admin')->group(function () { // group the routes with the same middleware instead of writing it for every route
     // admin routes // i created a custom blade directive to check if the user is admin or not in AppServiceProvider.php 'admin' i can refrece it as a meddleware in the routes as laravel ships with a middleware called 'can' in the kernel.php used for authorization can:then the ability name
-
     Route::resource('admin/posts', AdminPostController::class)->except('show'); // the show end point is refrerenced ->except('show') i dont need it you will see it if you run php artisan route:list
     // Route::get('admin/posts/create', [AdminPostController::class, 'create']); // for the admin to create a post
     // Route::post('admin/posts', [AdminPostController::class, 'store']);

@@ -4,7 +4,7 @@
     {{-- to pass custom attributes to the component from posts.blade view --}}
     <div class="py-6 px-5">
         <div>
-            <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="Blog Post illustration" class="rounded-xl">
+            <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="Blog Post illustration" class="rounded-xl" width="2880" height="1800"> {{-- the asset() if for adding the full link not only the path http://127.0.0.1:8000/ then the path  --}}
         </div>
 
         <div class="mt-8 flex flex-col justify-between">

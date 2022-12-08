@@ -12,7 +12,7 @@
                 <div class="flex-1">
                     <x-form.input name="thumbnail" type="file" :value="old('thumbnail', $post->thumbnail)" />
                 </div>
-                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="" class="rounded-xl ml-6"
+                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="" class="rounded-xl ml-6" {{-- the asset() if for adding the full link not only the path http://127.0.0.1:8000/ then the path  --}}
                     width="100">
             </div>
 

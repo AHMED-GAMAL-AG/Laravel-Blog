@@ -71,7 +71,7 @@ class AdminPostController extends Controller
         $post = $post ?? new Post(); // if you gave a post it will use it other wise it will use that new post
         return request()->validate([
             'title' => 'required',
-            'thumbnail' => $post->exists ? ['image'] : ['required','image'], // if the post exists then the thumbnail is optional but if it doesnt exist then it is required
+            'thumbnail' => $post->exists ? ['image'] : ['required', 'image'], // if the post exists then the thumbnail is optional but if it doesnt exist then it is required
             'slug' => ['required', ValidationRule::unique('posts', 'slug')->ignore($post)], //this has to be unique in the posts table on the slug column for when iam creating a new post the ->ignore($post) part iam creating a new post thier is no id aim not ignoring any thing BUT if this is already a post in the database ignore it $post same as $post->id it automatically gets the id
             'excerpt' => 'required',
             'body' => 'required',
