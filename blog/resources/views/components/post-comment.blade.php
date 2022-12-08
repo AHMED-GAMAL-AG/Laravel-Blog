@@ -4,13 +4,13 @@
 
 
         <div class="flex-shrink-0">
-            @if ($comment->author->gender == 'male')
-                {{-- <img src="https://avatars.dicebear.com/api/adventurer/{{ $comment->user_id}}.svg" alt="" width="60" height="60" class="rounded-xl"> --}}
-                <img src="https://joeschmoe.io/api/v1/male/{{ $comment->user_id}}" alt="" width="60" height="60" class="rounded-xl"> {{--  public function author()  the forgien key is author_id so i have to overide it  type $comment->author->gender insted of $comment->user_id->gender same as function name--}}
-            @elseif ($comment->author->gender == 'female')
-                <img src="https://joeschmoe.io/api/v1/female/{{ $comment->user_id}}" alt="" width="60"
-                    height="60" class="rounded-xl">
-            @endif
+
+            {{-- auth()->user()->name only use it when you are shure the user is signed in it makes object of the current user other wise it will return null --}}
+
+            <img src="https://avatars.dicebear.com/api/bottts/{{ ($comment->user_id)+3 }}.svg" alt="" width="60" height="60" class="rounded-full">
+            {{-- <img src="https://joeschmoe.io/api/v1/{{ auth()->user()->gender }}/{{ auth()->id() }}" alt="" width="60" height="60" class="rounded-full"> --}}
+
+
         </div>
 
         <div>
