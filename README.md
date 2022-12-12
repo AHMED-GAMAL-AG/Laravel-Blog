@@ -1,4 +1,4 @@
-# A Laravl Blog Project Course link: https://bit.ly/3uZ40WF
+# Course link: https://bit.ly/3uZ40WF
 
 
 # live demo:
