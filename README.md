@@ -3,7 +3,7 @@ https://user-images.githubusercontent.com/76778937/206899356-ace57ea3-c504-4f15-
 
 
 # Website Features:
-- Authentication
+- Authentication and Authorization
 - user view/comment on a post
 - HTTP API for generating a user avatar 
 - Restful API for subscribing users to the newsletter
