@@ -15,7 +15,7 @@ https://user-images.githubusercontent.com/76778937/206899356-ace57ea3-c504-4f15-
 
 <ul>
 <li><code>git clone https://github.com/AHMED-GAMAL-AG/Laravel-Blog.git</code></li>
-<li><code>Create a .env file and configure the database. <code></li>
+<li><code>Create a .env file and configure the database.</code></li>
 <li><code>composer install</code></li>
 <li><code>npm install</code></li>
 <li><code>php artisan key:generate</code></li>
